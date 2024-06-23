@@ -74,7 +74,7 @@ def write_to_csv(csv_data, output_file):
 
 contacts_path = "/Users/vmitchell/Documents/Obsidian/Vault/Personal/People I Know"
 location_path = "/Users/vmitchell/Documents/Obsidian/Vault/Personal/Locations"
-output_file = "contacts.csv"
+output_file = "contact-addresses.csv"
 
 csv_data = parse_yaml_files(contacts_path)
 write_to_csv(csv_data, output_file)
