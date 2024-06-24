@@ -5,10 +5,10 @@ import datetime
 import regex as re
 
 # Path to the CSV file
-csv_file = 'contacts-export.csv'
+csv_file = '/Users/vmitchell/GitHub/obsidian-contacts-sync/contacts-export.csv'
 
 # Path to the Contacts folder
-contacts_folder = 'People I Know'
+contacts_folder = '/Users/vmitchell/Documents/Obsidian/Vault/Personal/People I Know'
 
 def represent_none(self, _):
     return self.represent_scalar('tag:yaml.org,2002:null', '')
