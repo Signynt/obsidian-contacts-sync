@@ -48,7 +48,11 @@ def parse_yaml_files(folder_path):
                                 address = address.strip('"')
                                 address_simplified = re.sub(r'\(.*?\)', '', address)
                                 address_simplified = address_simplified.strip()
-                                #print(address)
+                                # If there is a `|` in the address, only take the second part
+                                if "|" in address:
+                                    address_simplified = address_simplified.split("|")[1].strip()
+                                    address = address.split("|")[0].strip()
+                                # print(address, address_simplified)
                                 coordinates = parse_location_files(location_path, address)
                                 geolocator = Nominatim(user_agent="your_app_name")
 
