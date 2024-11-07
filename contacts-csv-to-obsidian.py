@@ -75,5 +75,10 @@ with open(csv_file, 'r') as file:
 
                         # Write the modified content back to the file
                         if email != '' or phone_number != '' or birthday != '':
-                            with open(file_path, "w", encoding='utf-8') as file:
-                                file.write(content)
+                            with open(file_path, 'r', encoding='utf-8') as file:
+                                existing_content = file.read()
+                            if existing_content == content:
+                                pass
+                            else:
+                                with open(file_path, 'w', encoding='utf-8') as file:
+                                    file.write(content)
