@@ -76,7 +76,7 @@ def write_to_csv(csv_data, output_file):
             writer.writerow(["First Name", "Last Name", "Address", "Postal Code", "City", "Country"])
             writer.writerows(csv_data)
 
-contacts_path = "/Users/vmitchell/Obsidian/Vault/References/People I Know"
+contacts_path = "/Users/vmitchell/Obsidian/Vault/References/People"
 location_path = "/Users/vmitchell/Obsidian/Vault/References/Locations"
 output_file = "/Users/vmitchell/GitHub/obsidian-contacts-sync/contact-addresses.csv"
 

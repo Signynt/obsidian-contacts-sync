@@ -1,3 +1,6 @@
 .DS_Store
 contact-addresses.csv
 contacts-export.csv
+.python-version
+pyproject.toml
+uv.lock
