@@ -41,31 +41,30 @@ def parse_yaml_files(folder_path):
                 if "first-name" in yaml_data and "last-name" in yaml_data and "address" in yaml_data:
                     if yaml_data["first-name"] is not None and yaml_data["last-name"] is not None and yaml_data["address"] is not None:
                         if yaml_data["address"] != []:
-                            if yaml_data["address"] != []:
-                                address = str(yaml_data["address"])
-                                address = re.sub(r'\[|\]', '', address)
-                                address = address.strip("'")
-                                address = address.strip('"')
-                                address_simplified = re.sub(r'\(.*?\)', '', address)
-                                address_simplified = address_simplified.strip()
-                                # If there is a `|` in the address, only take the second part
-                                if "|" in address:
-                                    address_simplified = address_simplified.split("|")[1].strip()
-                                    address = address.split("|")[0].strip()
-                                # print(address, address_simplified)
-                                coordinates = parse_location_files(location_path, address)
-                                geolocator = Nominatim(user_agent="your_app_name")
-
-                                location_info = geolocator.reverse(coordinates, exactly_one=True)
-
+                            address = str(yaml_data["address"])
+                            address = re.sub(r'\[|\]', '', address)
+                            address = address.strip("'")
+                            address = address.strip('"')
+                            address_simplified = re.sub(r'\(.*?\)', '', address)
+                            address_simplified = address_simplified.strip()
+                            # If there is a `|` in the address, only take the second part
+                            if "|" in address:
+                                address_simplified = address_simplified.split("|")[1].strip()
+                                address = address.split("|")[0].strip()
+                            # print(address, address_simplified)
+                            coordinates = parse_location_files(location_path, address)
+                            geolocator = Nominatim(user_agent="your_app_name")
+                            try:
+                                location_info = geolocator.reverse(coordinates, exactly_one=True, timeout=10)
                                 if location_info is not None:
                                     postal_code = location_info.raw.get('address', {}).get('postcode')
                                     city = location_info.raw.get('address', {}).get('city')
                                     country = location_info.raw.get('address', {}).get('country')
 
                                     csv_data.append([yaml_data["first-name"], yaml_data["last-name"], address_simplified, postal_code, city, country])
-
-                                #csv_data.append([yaml_data["first-name"], yaml_data["last-name"], address_simplified])
+                            except Exception as e:
+                                print(f"Warning: geocoding failed for {address_simplified}: {e}")
+                                continue
 
     return csv_data
 
